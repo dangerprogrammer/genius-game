@@ -111,6 +111,7 @@ body {
                 inset: 0;
                 background: #fff5;
                 border-radius: 4vmin;
+                filter: blur(1vmin);
                 transition: opacity ease-in-out .15s;
             }
 
@@ -152,6 +153,14 @@ body {
             align-items: center;
             justify-content: center;
             overflow: hidden;
+
+            .color-ball {
+                position: absolute;
+                pointer-events: none;
+                inset: 10%;
+                border-radius: 50%;
+                background: #eee;
+            }
         }
     }
 
@@ -242,6 +251,7 @@ body {
 
         &.menu-drop {
             .pause-button {
+                pointer-events: none;
                 scale: .65;
                 translate: 0 calc((max(4rem, 4vmin) + 1em) * -1.5);
             }
@@ -261,6 +271,25 @@ body {
                     rotate: -45deg;
                 }
             }
+
+            &::before {
+                opacity: 1;
+                pointer-events: initial;
+            }
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background: #1128;
+            backdrop-filter: blur(.75rem);
+            opacity: 0;
+            pointer-events: none;
+            transition: .45s ease-in-out;
         }
     }
 }

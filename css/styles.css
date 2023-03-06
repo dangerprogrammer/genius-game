@@ -104,6 +104,8 @@ body .game-body .side::before {
   inset: 0;
   background: #fff5;
   border-radius: 4vmin;
+  -webkit-filter: blur(1vmin);
+          filter: blur(1vmin);
   -webkit-transition: opacity ease-in-out .15s;
   transition: opacity ease-in-out .15s;
 }
@@ -204,6 +206,14 @@ body .game-body .center-menu {
       -ms-flex-pack: center;
           justify-content: center;
   overflow: hidden;
+}
+
+body .game-body .center-menu .color-ball {
+  position: absolute;
+  pointer-events: none;
+  inset: 10%;
+  border-radius: 50%;
+  background: #eee;
 }
 
 body #main-canvas {
@@ -313,6 +323,7 @@ body .game-features .settings-button::after {
 }
 
 body .game-features.menu-drop .pause-button {
+  pointer-events: none;
   scale: .65;
   translate: 0 calc((max(4rem, 4vmin) + 1em) * -1.5);
 }
@@ -331,5 +342,26 @@ body .game-features.menu-drop .settings-button::after {
   height: 2.5rem;
   translate: 0;
   rotate: -45deg;
+}
+
+body .game-features.menu-drop::before {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+body .game-features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #1128;
+  -webkit-backdrop-filter: blur(0.75rem);
+          backdrop-filter: blur(0.75rem);
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: .45s ease-in-out;
+  transition: .45s ease-in-out;
 }
 /*# sourceMappingURL=styles.css.map */
