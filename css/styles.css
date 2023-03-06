@@ -6,6 +6,10 @@
           box-sizing: border-box;
 }
 
+ion-icon {
+  pointer-events: none;
+}
+
 body {
   min-height: 100vh;
   display: -webkit-box;
@@ -19,9 +23,10 @@ body {
           justify-content: center;
   background-color: #112;
   font-family: Poppins;
+  color: #eee;
 }
 
-body .settings {
+body .game-body {
   position: absolute;
   height: 80vmin;
   width: 80vmin;
@@ -35,7 +40,7 @@ body .settings {
   border-radius: 50%;
 }
 
-body .settings .side {
+body .game-body .side {
   position: relative;
   cursor: pointer;
   display: -webkit-box;
@@ -54,11 +59,11 @@ body .settings .side {
           user-select: none;
   font-size: 20vmin;
   font-weight: 700;
-  color: #0004;
+  color: #0003;
   border-radius: 4vmin;
 }
 
-body .settings .side .text {
+body .game-body .side .text {
   position: absolute;
   height: 75%;
   width: 75%;
@@ -76,22 +81,22 @@ body .settings .side .text {
   transition: scale ease-in-out .2s;
 }
 
-body .settings .side::after {
+body .game-body .side::after {
   content: '';
   inset: 1.5vmin;
   position: absolute;
   border-radius: 4vmin;
 }
 
-body .settings .side:active::before, body .settings .side.active::before {
+body .game-body .side:active::before, body .game-body .side.active::before {
   opacity: 1;
 }
 
-body .settings .side:active .text, body .settings .side.active .text {
+body .game-body .side:active .text, body .game-body .side.active .text {
   scale: 1.15;
 }
 
-body .settings .side::before {
+body .game-body .side::before {
   content: '';
   pointer-events: none;
   opacity: 0;
@@ -103,43 +108,43 @@ body .settings .side::before {
   transition: opacity ease-in-out .15s;
 }
 
-body .settings .side#green-side {
+body .game-body .side#green-side {
   background: #0a4;
 }
 
-body .settings .side#green-side .text {
+body .game-body .side#green-side .text {
   right: 13%;
   bottom: 13%;
 }
 
-body .settings .side#green-side, body .settings .side#green-side::before, body .settings .side#green-side::after {
+body .game-body .side#green-side, body .game-body .side#green-side::before, body .game-body .side#green-side::after {
   border-top-left-radius: 100%;
 }
 
-body .settings .side#green-side::after {
+body .game-body .side#green-side::after {
   -webkit-box-shadow: inset calc(3vmin * 1) calc(3vmin * 1) 3vmin 3vmin #fff2;
           box-shadow: inset calc(3vmin * 1) calc(3vmin * 1) 3vmin 3vmin #fff2;
 }
 
-body .settings .side#red-side {
+body .game-body .side#red-side {
   background: #e22;
 }
 
-body .settings .side#red-side .text {
+body .game-body .side#red-side .text {
   left: 13%;
   bottom: 13%;
 }
 
-body .settings .side#red-side, body .settings .side#red-side::before, body .settings .side#red-side::after {
+body .game-body .side#red-side, body .game-body .side#red-side::before, body .game-body .side#red-side::after {
   border-top-right-radius: 100%;
 }
 
-body .settings .side#red-side::after {
+body .game-body .side#red-side::after {
   -webkit-box-shadow: inset calc(3vmin * -1) calc(3vmin * 1) 3vmin 3vmin #fff2;
           box-shadow: inset calc(3vmin * -1) calc(3vmin * 1) 3vmin 3vmin #fff2;
 }
 
-body .settings .side#blue-side {
+body .game-body .side#blue-side {
   -ms-grid-column: 2;
   grid-column: 2;
   -ms-grid-row: 2;
@@ -147,47 +152,184 @@ body .settings .side#blue-side {
   background: #07f;
 }
 
-body .settings .side#blue-side .text {
+body .game-body .side#blue-side .text {
   left: 13%;
   top: 13%;
 }
 
-body .settings .side#blue-side, body .settings .side#blue-side::before, body .settings .side#blue-side::after {
+body .game-body .side#blue-side, body .game-body .side#blue-side::before, body .game-body .side#blue-side::after {
   border-bottom-right-radius: 100%;
 }
 
-body .settings .side#blue-side::after {
+body .game-body .side#blue-side::after {
   -webkit-box-shadow: inset calc(3vmin * -1) calc(3vmin * -1) 3vmin 3vmin #fff2;
           box-shadow: inset calc(3vmin * -1) calc(3vmin * -1) 3vmin 3vmin #fff2;
 }
 
-body .settings .side#yellow-side {
+body .game-body .side#yellow-side {
   background: yellow;
 }
 
-body .settings .side#yellow-side .text {
+body .game-body .side#yellow-side .text {
   right: 13%;
   top: 13%;
 }
 
-body .settings .side#yellow-side, body .settings .side#yellow-side::before, body .settings .side#yellow-side::after {
+body .game-body .side#yellow-side, body .game-body .side#yellow-side::before, body .game-body .side#yellow-side::after {
   border-bottom-left-radius: 100%;
 }
 
-body .settings .side#yellow-side::after {
+body .game-body .side#yellow-side::after {
   -webkit-box-shadow: inset calc(3vmin * 1) calc(3vmin * -1) 3vmin 3vmin #fff2;
           box-shadow: inset calc(3vmin * 1) calc(3vmin * -1) 3vmin 3vmin #fff2;
 }
 
-body .settings .center-menu {
+body .game-body .center-menu {
   position: absolute;
   inset: 27%;
   background: #112;
   border-radius: 50%;
   z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
 }
 
 body #main-canvas {
   position: absolute;
+}
+
+body .game-features {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 1em MAX(2em, 2vw);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  z-index: 100;
+  --size-dot: .5rem;
+}
+
+body .game-features .pause-button, body .game-features .settings-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: MAX(4rem, 4vmin);
+  width: MAX(4rem, 4vmin);
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 .5em #000a;
+          box-shadow: 0 0 .5em #000a;
+  border-radius: 50%;
+  background: #224a;
+}
+
+body .game-features .pause-button {
+  position: relative;
+  outline: none;
+  border: none;
+  color: #eee;
+  font-size: 2.5em;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+
+body .game-features .pause-button::before {
+  content: '';
+  position: absolute;
+  inset: 10%;
+  scale: .8;
+  opacity: 0;
+  background: #eee2;
+  border-radius: 50%;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+body .game-features .pause-button:active::before {
+  opacity: 1;
+  scale: 1.5;
+}
+
+body .game-features .settings-button {
+  z-index: 10000;
+}
+
+body .game-features .settings-button .center-dot, body .game-features .settings-button::before, body .game-features .settings-button::after {
+  position: absolute;
+  height: var(--size-dot);
+  width: var(--size-dot);
+  background: #eee;
+  -webkit-transition: .35s ease-in-out;
+  transition: .35s ease-in-out;
+}
+
+body .game-features .settings-button .center-dot {
+  border-radius: 50%;
+}
+
+body .game-features .settings-button::before, body .game-features .settings-button::after {
+  content: '';
+  border-radius: 2.5rem;
+}
+
+body .game-features .settings-button::before {
+  translate: calc(var(--size-dot) * -1.8);
+}
+
+body .game-features .settings-button::after {
+  translate: calc(var(--size-dot) * 1.8);
+}
+
+body .game-features.menu-drop .pause-button {
+  scale: .65;
+  translate: 0 calc((max(4rem, 4vmin) + 1em) * -1.5);
+}
+
+body .game-features.menu-drop .settings-button {
+  --size-dot: .25rem;
+}
+
+body .game-features.menu-drop .settings-button::before {
+  height: 2.5rem;
+  translate: 0;
+  rotate: 45deg;
+}
+
+body .game-features.menu-drop .settings-button::after {
+  height: 2.5rem;
+  translate: 0;
+  rotate: -45deg;
 }
 /*# sourceMappingURL=styles.css.map */

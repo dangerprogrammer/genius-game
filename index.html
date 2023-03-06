@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <main class="settings" id="main-settings">
+    <main class="game-body">
         <div class="side" id="green-side">
             <span class="text">1</span>
         </div>
@@ -20,8 +20,34 @@
         <div class="side" id="yellow-side">
             <span class="text">4</span>
         </div>
-        <span class="center-menu"></span>
+        <span class="center-menu">
+            <div class="game-status">
+                <div class="won-game">Won Game</div>
+                <div class="lose-game">Lose Game</div>
+            </div>
+            <div class="restart">Restart</div>
+        </span>
+    </main>
+    <aside class="game-features">
+        <button class="pause-button">
+            <ion-icon name="pause-outline"></ion-icon>
+        </button>
+        <div class="settings-button">
+            <span class="center-dot"></span>
+        </div>
+    </aside>
+    <main class="main-settings">
+        <h1>Genius Game</h1>
+        <div class="start-game">Start Game</div>
+        <div class="game-settings">
+            <button data-open="game-settings">Game Settings</button>
+            <article id="game-settings">Game Settings Container</article>
+        </div>
+        <span class="credits">Created By Patrick V. Léo</span>
     </main>
     <canvas id="main-canvas"></canvas>
+    <script src="js/main.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
