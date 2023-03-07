@@ -1,30 +1,33 @@
 const pauseButton = query('.pause-button'), settingsButton = query('.settings-button'),
-    gameFeatures = query('.game-features'), menuContainer = query('.menu-container');
+    gameFeatures = query('.game-features'), menuContainer = query('.menu-container'),
+    startGame = query('.start-game');
 
-window.addEventListener("load", () => setMenu('start'));
+window.addEventListener("load", () => {
+    setMenu('start');
 
-settingsButton.addEventListener("click", () => {
-    gameFeatures.classList.toggle('menu-drop');
+    startGame.addEventListener("click", playGame);
 
-    const hasMenu = gameFeatures.classList.contains('menu-drop');
+    settingsButton.addEventListener("click", () => {
+        gameFeatures.classList.toggle('menu-drop');
 
-    menuContainer.classList.toggle('show-menu', hasMenu);
+        const hasMenu = gameFeatures.classList.contains('menu-drop');
 
-    if (hasMenu) {
-        setMenu('settings');
-    };
-});
+        menuContainer.classList.toggle('show-menu', hasMenu);
 
-pauseButton.addEventListener("click", () => {
-    gameFeatures.classList.add('menu-drop');
+        if (hasMenu) setMenu('settings');
+    });
 
-    const hasMenu = gameFeatures.classList.contains('menu-drop');
+    pauseButton.addEventListener("click", () => {
+        gameFeatures.classList.add('menu-drop');
 
-    menuContainer.classList.toggle('show-menu', hasMenu);
+        const hasMenu = gameFeatures.classList.contains('menu-drop');
 
-    setMenu('pause', 'JOGO PAUSADO');
-});
+        menuContainer.classList.toggle('show-menu', hasMenu);
 
-document.addEventListener("keydown", ev => {
-    console.log(ev.key);
+        setMenu('pause', 'JOGO PAUSADO');
+    });
+
+    document.addEventListener("keydown", ev => {
+        console.log(ev.key);
+    });
 });
