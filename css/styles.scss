@@ -59,6 +59,7 @@ body {
         grid-template-rows: repeat(2, 1fr);
         gap: 3vmin;
         border-radius: 50%;
+        --ball-color: red;
 
         .side {
             position: relative;
@@ -91,16 +92,6 @@ body {
                 inset: $border-size / 2;
                 position: absolute;
                 border-radius: 4vmin;
-            }
-
-            &:active, &.active {
-                &::before {
-                    opacity: 1;
-                }
-
-                .text {
-                    scale: 1.15;
-                }
             }
 
             &::before {
@@ -140,6 +131,22 @@ body {
 
                 @include numberPosition($center-dist, right, top, $border-size);
             }
+
+            &:active, &.active {
+                :has(&) {
+                    .center-menu .color-ball {
+                        box-shadow: inset 0 0 5vmin 1vmin var(--ball-color);
+                    }
+                }
+
+                &::before {
+                    opacity: 1;
+                }
+
+                .text {
+                    scale: 1.15;
+                }
+            }
         }
 
         .center-menu {
@@ -160,6 +167,7 @@ body {
                 inset: 10%;
                 border-radius: 50%;
                 background: #eee;
+                transition: .15s;
             }
         }
     }
@@ -290,6 +298,33 @@ body {
             opacity: 0;
             pointer-events: none;
             transition: .45s ease-in-out;
+        }
+    }
+
+    .menu-container {
+        font-size: clamp(.8rem, 2vw, 1.2rem);
+        z-index: 100;
+        translate: 0 -100vh;
+        transition: .4s ease-in-out;
+
+        &.show-menu  {
+            translate: 0;
+        }
+
+        section {
+            &:not(.show) {
+                display: none;
+            }
+
+            &#menu-start {
+                height: 80vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                text-align: center;
+                gap: 3vmin;
+            }
         }
     }
 }
