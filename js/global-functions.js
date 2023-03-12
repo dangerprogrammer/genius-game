@@ -2,8 +2,9 @@
     let dataGenius = {
         fullGenius: [],
         actGenius: [],
+        sideGenius: [],
         defaultSpd: 5e2,
-        duration: 1e3
+        duration: 5e2
     };
 
     const menuList = {
@@ -14,7 +15,7 @@
             if (!isShowing) {
                 gameFeatures.classList.remove('menu-drop');
                 menuContainer.classList.remove('show-menu');
-            };
+            } else enableClicks(!1);
 
             showMenu(menuStart, isShowing);
         },
@@ -28,6 +29,14 @@
 
             menuPause.innerHTML = txt;
             showMenu(menuPause);
+        },
+        restart() {
+            const menuRestart = query('#menu-restart'),
+                settingsButton = query('.settings-button');
+
+            settingsButton.classList.add('hidden');
+
+            showMenu(menuRestart);
         }
     },
     globalFunctions = {
@@ -42,6 +51,17 @@
 
             if (menuTool) menuTool(...contents);
         },
+        viewFeatures() {
+            const gameFeatures = query('.game-features'), menuContainer = query('.menu-container');
+
+            gameFeatures.classList.toggle('menu-drop');
+
+            const hasMenu = gameFeatures.classList.contains('menu-drop');
+    
+            menuContainer.classList.toggle('show-menu', hasMenu);
+
+            return hasMenu;
+        },
         showMenu(elem, isShowing = !0) {
             const menus = [...query('.menu-container > *', !0)],
                 notElem = menus.filter(({id}) => id !== (elem.id || elem));
@@ -55,13 +75,19 @@
         randomRoundedNum(min = 0, max = 1) {
             return min + Math.round(Math.random() * (max - min));
         },
+        verifyArr() {
+            const {sideGenius, fullGenius} = dataGenius,
+                sideJoin = sideGenius.join(""), fullJoin = fullGenius.join(""),
+                isVerify = fullJoin.startsWith(sideJoin), isEqual = fullJoin === sideJoin;
+
+            return isEqual ? 'equal' : isVerify ? 'starts' : !1;
+        },
         increaseFullGenius(count = 1) {
             for (let i = 0; i < Math.max(count, 1); i++) {
                 const {fullGenius} = dataGenius,
                     randomNumber = randomRoundedNum(0, 3);
 
                 fullGenius.push(randomNumber);
-                console.log(`Added ${randomNumber} to fullGenius!\n`, fullGenius);
             };
         },
         turnSide(sideNum, active = !0) {
@@ -69,16 +95,41 @@
                 gameBody = query('.game-body'),
                 sideColor = getComputedStyle(side).getPropertyValue('--def-color');
 
+            if (!side) return !1;
+
             side.classList.toggle('active', active);
             gameBody.style.setProperty('--ball-color', sideColor);
         },
+        pressSide(sideNum) {
+            const {isClickEnable} = global,
+                {sideGenius, duration} = dataGenius;
+
+            if (!isClickEnable) return;
+
+            sideGenius.push(sideNum);
+
+            const verified = verifyArr();
+
+            if (verified === 'equal') {
+
+            } else if (verified === 'starts') {
+                turnSide(sideNum, !0);
+
+                setTimeout(() => turnSide(sideNum, !1), duration);
+            } else loseGenius();
+        },
+        loseGenius() {
+            dataGenius.fullGenius = [];
+            dataGenius.actGenius = [];
+            dataGenius.sideGenius = [];
+
+            viewFeatures();
+    
+            setMenu('restart');
+        },
         startGenius() {
             const {fullGenius, actGenius, defaultSpd} = dataGenius;
-            if (actGenius.length < fullGenius.length) {
-                return setTimeout(continueGenius, defaultSpd);
-            } else {
-                return enableClicks();
-            };
+            if (actGenius.length < fullGenius.length) return setTimeout(continueGenius, defaultSpd);
         },
         continueGenius() {
             const {fullGenius, actGenius, defaultSpd, duration} = dataGenius,
@@ -90,11 +141,11 @@
             setTimeout(() => {
                 turnSide(prev, !1);
 
-                if (actGenius.length < fullGenius.length) return setTimeout(continueGenius, defaultSpd);
+                return setTimeout(actGenius.length < fullGenius.length ? continueGenius : enableClicks, defaultSpd);
             }, duration);
         },
-        enableClicks() {
-
+        enableClicks(enable = !0) {
+            global.isClickEnable = enable;
         },
         playGame() {
             const settingsButton = query('.settings-button');

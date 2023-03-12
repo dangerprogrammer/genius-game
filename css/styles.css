@@ -259,6 +259,7 @@ body .game-features {
 }
 
 body .game-features .pause-button, body .game-features .settings-button {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -279,15 +280,7 @@ body .game-features .pause-button, body .game-features .settings-button {
   transition: .2s ease-in-out;
 }
 
-body .game-features .pause-button {
-  position: relative;
-  outline: none;
-  border: none;
-  color: #eee;
-  font-size: 2.5em;
-}
-
-body .game-features .pause-button::before {
+body .game-features .pause-button::before, body .game-features .settings-button::before {
   content: '';
   position: absolute;
   inset: 10%;
@@ -299,16 +292,23 @@ body .game-features .pause-button::before {
   transition: .2s;
 }
 
-body .game-features .pause-button:active::before {
+body .game-features .pause-button:active::before, body .game-features .settings-button:active::before {
   opacity: 1;
   scale: 1.5;
+}
+
+body .game-features .pause-button {
+  outline: none;
+  border: none;
+  color: #eee;
+  font-size: 2.5em;
 }
 
 body .game-features .settings-button {
   z-index: 10000;
 }
 
-body .game-features .settings-button .center-dot, body .game-features .settings-button::before, body .game-features .settings-button::after {
+body .game-features .settings-button .center-dot, body .game-features .settings-button .left-dot, body .game-features .settings-button .right-dot {
   position: absolute;
   height: var(--size-dot);
   width: var(--size-dot);
@@ -321,16 +321,15 @@ body .game-features .settings-button .center-dot {
   border-radius: 50%;
 }
 
-body .game-features .settings-button::before, body .game-features .settings-button::after {
-  content: '';
+body .game-features .settings-button .left-dot, body .game-features .settings-button .right-dot {
   border-radius: 2.5rem;
 }
 
-body .game-features .settings-button::before {
+body .game-features .settings-button .left-dot {
   translate: calc(var(--size-dot) * -1.8);
 }
 
-body .game-features .settings-button::after {
+body .game-features .settings-button .right-dot {
   translate: calc(var(--size-dot) * 1.8);
 }
 
@@ -350,13 +349,13 @@ body .game-features.menu-drop .settings-button {
   --size-dot: .25rem;
 }
 
-body .game-features.menu-drop .settings-button::before {
+body .game-features.menu-drop .settings-button .left-dot {
   height: 2.5rem;
   translate: 0;
   rotate: 45deg;
 }
 
-body .game-features.menu-drop .settings-button::after {
+body .game-features.menu-drop .settings-button .right-dot {
   height: 2.5rem;
   translate: 0;
   rotate: -45deg;

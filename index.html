@@ -33,7 +33,9 @@
             <ion-icon name="pause-outline"></ion-icon>
         </button>
         <div class="settings-button hidden">
+            <span class="left-dot"></span>
             <span class="center-dot"></span>
+            <span class="right-dot"></span>
         </div>
     </aside>
     <main class="menu-container show-menu">
@@ -52,7 +54,10 @@
         </section>
         <section id="menu-settings"></section>
         <section id="menu-pause"></section>
-        <section id="menu-restart"></section>
+        <section id="menu-restart">
+            <h1>Você perdeu!</h1>
+            <button class="restart-game">Reiniciar</button>
+        </section>
     </main>
     <canvas id="main-canvas"></canvas>
     <script src="js/global-functions.js"></script>

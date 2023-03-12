@@ -196,6 +196,7 @@ body {
         $size-bar: 2.5rem;
 
         .pause-button, .settings-button {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -206,14 +207,6 @@ body {
             border-radius: 50%;
             background: #224a;
             transition: .2s ease-in-out;
-        }
-
-        .pause-button {
-            position: relative;
-            outline: none;
-            border: none;
-            color: #eee;
-            font-size: 2.5em;
 
             &::before {
                 content: '';
@@ -232,10 +225,17 @@ body {
             }
         }
 
+        .pause-button {
+            outline: none;
+            border: none;
+            color: #eee;
+            font-size: 2.5em;
+        }
+
         .settings-button {
             z-index: 10000;
 
-            .center-dot, &::before, &::after {
+            .center-dot, .left-dot, .right-dot {
                 position: absolute;
                 height: var(--size-dot);
                 width: var(--size-dot);
@@ -247,16 +247,15 @@ body {
                 border-radius: 50%;
             }
 
-            &::before, &::after {
-                content: '';
+            .left-dot, .right-dot {
                 border-radius: $size-bar;
             }
 
-            &::before {
+            .left-dot {
                 translate: calc(var(--size-dot) * -1.8);
             }
 
-            &::after {
+            .right-dot {
                 translate: calc(var(--size-dot) * 1.8);
             }
 
@@ -277,13 +276,13 @@ body {
             .settings-button {
                 --size-dot: .25rem;
 
-                &::before {
+                .left-dot {
                     height: $size-bar;
                     translate: 0;
                     rotate: 45deg;
                 }
                 
-                &::after {
+                .right-dot {
                     height: $size-bar;
                     translate: 0;
                     rotate: -45deg;
