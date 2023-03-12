@@ -59,7 +59,7 @@ body {
         grid-template-rows: repeat(2, 1fr);
         gap: 3vmin;
         border-radius: 50%;
-        --ball-color: red;
+        --ball-color: transparent;
 
         .side {
             position: relative;
@@ -100,39 +100,43 @@ body {
                 opacity: 0;
                 position: absolute;
                 inset: 0;
-                background: #fff5;
+                background: var(--def-color);
                 border-radius: 4vmin;
                 filter: blur(1vmin);
                 transition: opacity ease-in-out .15s;
             }
 
             &#green-side {
-                background: #0a4;
+                --def-color: #0a4;
+                background: var(--def-color);
 
                 @include numberPosition($center-dist, right, bottom, $border-size);
             }
 
             &#red-side {
-                background: #e22;
+                --def-color: #e22;
+                background: var(--def-color);
 
                 @include numberPosition($center-dist, left, bottom, $border-size);
             }
 
             &#blue-side {
+                --def-color: #07f;
                 grid-column: 2;
                 grid-row: 2;
-                background: #07f;
+                background: var(--def-color);
 
                 @include numberPosition($center-dist, left, top, $border-size);
             }
 
             &#yellow-side {
-                background: yellow;
+                --def-color: yellow;
+                background: var(--def-color);
 
                 @include numberPosition($center-dist, right, top, $border-size);
             }
 
-            &:active, &.active {
+            &.active {
                 :has(&) {
                     .center-menu .color-ball {
                         box-shadow: inset 0 0 5vmin 1vmin var(--ball-color);

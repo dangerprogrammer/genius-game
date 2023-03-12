@@ -2,8 +2,8 @@
     let dataGenius = {
         fullGenius: [],
         actGenius: [],
-        defaultSpd: 1e3,
-        duration: 5e2
+        defaultSpd: 5e2,
+        duration: 1e3
     };
 
     const menuList = {
@@ -55,31 +55,45 @@
         randomRoundedNum(min = 0, max = 1) {
             return min + Math.round(Math.random() * (max - min));
         },
-        increaseFullGenius() {
-            const {fullGenius} = dataGenius,
-                randomNumber = randomRoundedNum(0, 3);
+        increaseFullGenius(count = 1) {
+            for (let i = 0; i < Math.max(count, 1); i++) {
+                const {fullGenius} = dataGenius,
+                    randomNumber = randomRoundedNum(0, 3);
 
-            fullGenius.push(randomNumber);
-            console.log(`Added ${randomNumber} to fullGenius!`, fullGenius);
+                fullGenius.push(randomNumber);
+                console.log(`Added ${randomNumber} to fullGenius!\n`, fullGenius);
+            };
+        },
+        turnSide(sideNum, active = !0) {
+            const side = [...query('.side', true)][sideNum],
+                gameBody = query('.game-body'),
+                sideColor = getComputedStyle(side).getPropertyValue('--def-color');
+
+            side.classList.toggle('active', active);
+            gameBody.style.setProperty('--ball-color', sideColor);
         },
         startGenius() {
-            const {fullGenius, actGenius} = dataGenius;
+            const {fullGenius, actGenius, defaultSpd} = dataGenius;
             if (actGenius.length < fullGenius.length) {
-                return continueGenius();
+                return setTimeout(continueGenius, defaultSpd);
             } else {
-                return setClicks();
+                return enableClicks();
             };
         },
         continueGenius() {
-            const {fullGenius, actGenius} = dataGenius,
+            const {fullGenius, actGenius, defaultSpd, duration} = dataGenius,
                 prev = dataGenius.fullGenius[dataGenius.actGenius.length];
 
             actGenius.push(prev);
-            console.log(`Added ${prev} to actGenius!`, actGenius);
 
-            if (actGenius.length < fullGenius.length) return continueGenius();
+            turnSide(prev, !0);
+            setTimeout(() => {
+                turnSide(prev, !1);
+
+                if (actGenius.length < fullGenius.length) return setTimeout(continueGenius, defaultSpd);
+            }, duration);
         },
-        setClicks() {
+        enableClicks() {
 
         },
         playGame() {
@@ -91,7 +105,7 @@
         },
         startMemory(delay = 0) {
             setTimeout(() => {
-                increaseFullGenius();
+                increaseFullGenius(3);
 
                 startGenius();
             }, delay);
