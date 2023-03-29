@@ -16,6 +16,7 @@ window.addEventListener("load", () => {
         const hasMenu = viewFeatures();
 
         if (hasMenu) setMenu('settings');
+        else startGenius();
     });
 
     restartGame.addEventListener("click", playGame);

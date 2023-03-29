@@ -111,7 +111,18 @@
             const verified = verifyArr();
 
             if (verified === 'equal') {
+                turnSide(sideNum, !0);
 
+                setTimeout(() => {
+                    turnSide(sideNum, !1);
+
+                    setTimeout(() => {
+                        increaseFullGenius();
+
+                        startGenius();
+                        enableClicks(!1);
+                    }, duration / 2);
+                }, duration);
             } else if (verified === 'starts') {
                 turnSide(sideNum, !0);
 
@@ -128,12 +139,15 @@
             setMenu('restart');
         },
         startGenius() {
-            const {fullGenius, actGenius, defaultSpd} = dataGenius;
-            if (actGenius.length < fullGenius.length) return setTimeout(continueGenius, defaultSpd);
+            const {defaultSpd} = dataGenius;
+            dataGenius.actGenius = [];
+            dataGenius.sideGenius = [];
+
+            setTimeout(continueGenius, defaultSpd);
         },
         continueGenius() {
             const {fullGenius, actGenius, defaultSpd, duration} = dataGenius,
-                prev = dataGenius.fullGenius[dataGenius.actGenius.length];
+                prev = fullGenius[actGenius.length];
 
             actGenius.push(prev);
 
@@ -156,9 +170,10 @@
         },
         startMemory(delay = 0) {
             setTimeout(() => {
-                increaseFullGenius(3);
+                increaseFullGenius();
 
                 startGenius();
+                enableClicks(!1);
             }, delay);
         }
     };
