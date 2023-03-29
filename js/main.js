@@ -27,5 +27,5 @@ window.addEventListener("load", () => {
         setMenu('pause', 'JOGO PAUSADO');
     });
 
-    document.addEventListener("keyup", ev => pressSide(Number(ev.key) - 1));
+    document.addEventListener("keyup", ev => !(+ev.key >= 1 && +ev.key <= 4) || pressSide(+ev.key - 1));
 });

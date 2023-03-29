@@ -142,7 +142,7 @@
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
 
-            setScore(0);
+            setScore();
 
             viewFeatures();
     
