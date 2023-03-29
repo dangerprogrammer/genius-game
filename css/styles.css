@@ -21,6 +21,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  overflow: hidden;
   background-color: #112;
   font-family: Poppins;
   color: #eee;
@@ -339,6 +340,21 @@ body .game-features .settings-button.hidden {
   translate: 0 calc((max(4rem, 4vmin) + 1em) * -1.5);
 }
 
+body .game-features .points-text {
+  position: absolute;
+  pointer-events: none;
+  left: 50%;
+  translate: -50%;
+  font-size: 1.4em;
+  font-weight: 600;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+}
+
+body .game-features .points-text .score {
+  font-weight: 900;
+}
+
 body .game-features.menu-drop .pause-button {
   pointer-events: none;
   scale: .65;
@@ -359,6 +375,11 @@ body .game-features.menu-drop .settings-button .right-dot {
   height: 2.5rem;
   translate: 0;
   rotate: -45deg;
+}
+
+body .game-features.menu-drop .points-text {
+  scale: .65;
+  translate: -50% calc((max(4rem, 4vmin) + 1em) * -1.5);
 }
 
 body .game-features.menu-drop::before {

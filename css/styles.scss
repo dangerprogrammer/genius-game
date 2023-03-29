@@ -46,6 +46,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     background-color: #112;
     font-family: Poppins;
     color: #eee;
@@ -266,6 +267,20 @@ body {
             }
         }
 
+        .points-text {
+            position: absolute;
+            pointer-events: none;
+            left: 50%;
+            translate: -50%;
+            font-size: 1.4em;
+            font-weight: 600;
+            transition: .2s ease-in-out;
+
+            .score {
+                font-weight: 900;
+            }
+        }
+
         &.menu-drop {
             .pause-button {
                 pointer-events: none;
@@ -287,6 +302,11 @@ body {
                     translate: 0;
                     rotate: -45deg;
                 }
+            }
+
+            .points-text {
+                scale: .65;
+                translate: -50% calc((max(4rem, 4vmin) + 1em) * -1.5);
             }
 
             &::before {

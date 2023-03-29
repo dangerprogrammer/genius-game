@@ -3,6 +3,7 @@
         fullGenius: [],
         actGenius: [],
         sideGenius: [],
+        score: 0,
         defaultSpd: 5e2,
         duration: 5e2
     };
@@ -50,6 +51,11 @@
             const menuTool = menuList[menuMode];
 
             if (menuTool) menuTool(...contents);
+        },
+        setScore(score = 0) {
+            const scoreSpan = query('.score');
+
+            scoreSpan.innerHTML = score;
         },
         viewFeatures() {
             const gameFeatures = query('.game-features'), menuContainer = query('.menu-container');
@@ -111,7 +117,10 @@
             const verified = verifyArr();
 
             if (verified === 'equal') {
+                enableClicks(!1);
                 turnSide(sideNum, !0);
+                dataGenius.score++;
+                setScore(dataGenius.score);
 
                 setTimeout(() => {
                     turnSide(sideNum, !1);
@@ -120,7 +129,6 @@
                         increaseFullGenius();
 
                         startGenius();
-                        enableClicks(!1);
                     }, duration / 2);
                 }, duration);
             } else if (verified === 'starts') {
