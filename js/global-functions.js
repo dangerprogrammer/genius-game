@@ -142,6 +142,8 @@
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
 
+            setScore(0);
+
             viewFeatures();
     
             setMenu('restart');
