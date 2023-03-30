@@ -1,7 +1,8 @@
 const pauseButton = query('.pause-button'), settingsButton = query('.settings-button'),
     gameFeatures = query('.game-features'), menuContainer = query('.menu-container'),
     startGame = query('.start-game'), restartGame = query('.restart-game'),
-    sides = [...query('.side', true)];
+    sides = [...query('.side', !0)],
+    dataOpens = [...query('[data-open]', !0)];
 
 window.addEventListener("load", () => {
     setMenu('start');
@@ -16,6 +17,22 @@ window.addEventListener("load", () => {
             turnSide(ind);
             console.log("mouseUp", ind);
         });
+    });
+
+    dataOpens.forEach(dataOpen => {
+        dataOpen.addEventListener("click", () => {
+            const article = [...dataOpen.parentElement.children].find(child => child.id === dataOpen.dataset.open),
+                articleChilds = [...article.children];
+
+            dataOpen.classList.toggle('active');
+
+            articleChilds.forEach((child, ind) => {
+                const isShow = child.classList.contains('show');
+
+                setTimeout(() => child.classList.toggle('show'), (isShow ? articleChilds.length - 1 - ind : ind) * 1e2);
+            });
+        });
+        dataOpen.click();
     });
 
     startGame.addEventListener("click", playGame);

@@ -386,9 +386,11 @@ body {
                     width: 50vw;
                     min-width: 15rem;
 
-                    .start-game, [data-open="game-settings"] {
+                    .start-game, [data-open], [data-open] ~ article > * {
                         position: relative;
                         width: 100%;
+                        font-weight: 600;
+                        letter-spacing: .1vmin;
                         padding: calc(min(2vmin, 10px)) 0;
                         transition: .2s ease-in-out;
                         cursor: pointer;
@@ -436,10 +438,69 @@ body {
                                 transform: translate(0) rotate(-45deg);
                             }
                         }
+
+                        &.active {
+                            &::before, &::after {
+                                opacity: .75;
+                                scale: 1;
+                            }
+
+                            &::before {
+                                transform: translate(0) rotate(-135deg);
+                            }
+
+                            &::after {
+                                transform: translate(0) rotate(45deg);
+                            }
+                        }
                     }
 
                     .game-settings {
                         width: 100%;
+
+                        [data-open] ~ article {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            > * {
+                                transition: .15s ease-in-out;
+                                translate: 0 -1rem;
+                                pointer-events: none;
+                                opacity: 0;
+                                font-weight: inherit;
+                                width: 65%;
+                                padding: calc(min(1.5vmin, .5rem)) 3vmin;
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                justify-content: space-between;
+                                cursor: inherit;
+
+                                &:hover {
+                                    letter-spacing: .1vmin;
+                                }
+
+                                &.show {
+                                    translate: 0;
+                                    opacity: 1;
+                                    pointer-events: inherit;
+                                }
+
+                                select {
+                                    background: #1124;
+                                    backdrop-filter: blur(.1rem);
+                                    padding: .5vmin 2vmin;
+                                    outline: none !important;
+                                    border: none !important;
+                                    border-radius: 1vmin;
+                                    text-align: center;
+                                    color: white;
+                                    width: 10vmin;
+                                    font-weight: 700;
+                                }
+                            }
+                        }
                     }
                 }
             }

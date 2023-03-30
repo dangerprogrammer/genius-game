@@ -157,6 +157,7 @@
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
             dataGenius.score = 0;
+            dataGenius.defaultSpd = 5e2;
             console.clear();
 
             setScore();
@@ -166,9 +167,11 @@
             setMenu('restart');
         },
         startGenius() {
-            const {defaultSpd} = dataGenius;
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
+            dataGenius.defaultSpd = Math.max(dataGenius.defaultSpd - 25, 150);
+
+            const {defaultSpd} = dataGenius;
 
             pauseGenius(!1);
 

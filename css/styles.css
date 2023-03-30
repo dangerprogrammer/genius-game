@@ -483,16 +483,18 @@ body .menu-container section#menu-start .buttons {
   min-width: 15rem;
 }
 
-body .menu-container section#menu-start .buttons .start-game, body .menu-container section#menu-start .buttons [data-open="game-settings"] {
+body .menu-container section#menu-start .buttons .start-game, body .menu-container section#menu-start .buttons [data-open], body .menu-container section#menu-start .buttons [data-open] ~ article > * {
   position: relative;
   width: 100%;
+  font-weight: 600;
+  letter-spacing: .1vmin;
   padding: calc(min(2vmin, 10px)) 0;
   -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
   cursor: pointer;
 }
 
-body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]::after {
+body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open]::before, body .menu-container section#menu-start .buttons [data-open]::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -505,7 +507,7 @@ body .menu-container section#menu-start .buttons .start-game::before, body .menu
   opacity: 0;
 }
 
-body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]::before {
+body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons [data-open]::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *::before {
   left: 0;
   -webkit-transform: translate(3vmin) rotate(-45deg);
           transform: translate(3vmin) rotate(-45deg);
@@ -513,7 +515,7 @@ body .menu-container section#menu-start .buttons .start-game::before, body .menu
   border-left: .2rem solid currentColor;
 }
 
-body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]::after {
+body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open]::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *::after {
   right: 0;
   -webkit-transform: translate(-3vmin) rotate(-45deg);
           transform: translate(-3vmin) rotate(-45deg);
@@ -521,28 +523,105 @@ body .menu-container section#menu-start .buttons .start-game::after, body .menu-
   border-right: .2rem solid currentColor;
 }
 
-body .menu-container section#menu-start .buttons .start-game:hover, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover {
+body .menu-container section#menu-start .buttons .start-game:hover, body .menu-container section#menu-start .buttons [data-open]:hover, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover {
   letter-spacing: .4vmin;
   text-shadow: 0 0 1vmin;
 }
 
-body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::after {
+body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open]:hover::before, body .menu-container section#menu-start .buttons [data-open]:hover::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::after {
   opacity: .5;
   scale: 1;
 }
 
-body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::before {
+body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons [data-open]:hover::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::before {
   -webkit-transform: translate(0) rotate(-45deg);
           transform: translate(0) rotate(-45deg);
 }
 
-body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::after {
+body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open]:hover::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::after {
   -webkit-transform: translate(0) rotate(-45deg);
           transform: translate(0) rotate(-45deg);
+}
+
+body .menu-container section#menu-start .buttons .start-game.active::before, body .menu-container section#menu-start .buttons .start-game.active::after, body .menu-container section#menu-start .buttons [data-open].active::before, body .menu-container section#menu-start .buttons [data-open].active::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::after {
+  opacity: .75;
+  scale: 1;
+}
+
+body .menu-container section#menu-start .buttons .start-game.active::before, body .menu-container section#menu-start .buttons [data-open].active::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::before {
+  -webkit-transform: translate(0) rotate(-135deg);
+          transform: translate(0) rotate(-135deg);
+}
+
+body .menu-container section#menu-start .buttons .start-game.active::after, body .menu-container section#menu-start .buttons [data-open].active::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::after {
+  -webkit-transform: translate(0) rotate(45deg);
+          transform: translate(0) rotate(45deg);
 }
 
 body .menu-container section#menu-start .buttons .game-settings {
   width: 100%;
+}
+
+body .menu-container section#menu-start .buttons .game-settings [data-open] ~ article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body .menu-container section#menu-start .buttons .game-settings [data-open] ~ article > * {
+  -webkit-transition: .15s ease-in-out;
+  transition: .15s ease-in-out;
+  translate: 0 -1rem;
+  pointer-events: none;
+  opacity: 0;
+  font-weight: inherit;
+  width: 65%;
+  padding: calc(min(1.5vmin, .5rem)) 3vmin;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: inherit;
+}
+
+body .menu-container section#menu-start .buttons .game-settings [data-open] ~ article > *:hover {
+  letter-spacing: .1vmin;
+}
+
+body .menu-container section#menu-start .buttons .game-settings [data-open] ~ article > *.show {
+  translate: 0;
+  opacity: 1;
+  pointer-events: inherit;
+}
+
+body .menu-container section#menu-start .buttons .game-settings [data-open] ~ article > * select {
+  background: #1124;
+  -webkit-backdrop-filter: blur(0.1rem);
+          backdrop-filter: blur(0.1rem);
+  padding: .5vmin 2vmin;
+  outline: none !important;
+  border: none !important;
+  border-radius: 1vmin;
+  text-align: center;
+  color: white;
+  width: 10vmin;
+  font-weight: 700;
 }
 
 body .menu-container section:not(.show) {
