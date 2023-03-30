@@ -95,17 +95,19 @@ body .game-body .side::before {
   pointer-events: none;
   opacity: 0;
   position: absolute;
-  inset: 0;
-  background: var(--def-color);
+  inset: -.5rem;
+  background: var(--def-light-color);
   border-radius: 4vmin;
   -webkit-filter: blur(1vmin);
           filter: blur(1vmin);
   -webkit-transition: opacity ease-in-out .15s;
   transition: opacity ease-in-out .15s;
+  z-index: -1;
 }
 
 body .game-body .side#green-side {
   --def-color: #0a4;
+  --def-light-color: #7fa;
   background: var(--def-color);
 }
 
@@ -125,6 +127,7 @@ body .game-body .side#green-side::after {
 
 body .game-body .side#red-side {
   --def-color: #e22;
+  --def-light-color: #f99;
   background: var(--def-color);
 }
 
@@ -144,6 +147,7 @@ body .game-body .side#red-side::after {
 
 body .game-body .side#blue-side {
   --def-color: #07f;
+  --def-light-color: #6cf;
   -ms-grid-column: 2;
   grid-column: 2;
   -ms-grid-row: 2;
@@ -167,6 +171,7 @@ body .game-body .side#blue-side::after {
 
 body .game-body .side#yellow-side {
   --def-color: yellow;
+  --def-light-color: #ffa;
   background: var(--def-color);
 }
 
@@ -185,8 +190,8 @@ body .game-body .side#yellow-side::after {
 }
 
 :has(body .game-body .side.active) .center-menu .color-ball {
-  -webkit-box-shadow: inset 0 0 5vmin 1vmin var(--ball-color);
-          box-shadow: inset 0 0 5vmin 1vmin var(--ball-color);
+  -webkit-box-shadow: inset 0 0 10vmin 1vmin var(--ball-color), 0 0 4vmin var(--ball-color);
+          box-shadow: inset 0 0 10vmin 1vmin var(--ball-color), 0 0 4vmin var(--ball-color);
 }
 
 body .game-body .side.active::before {
@@ -349,10 +354,30 @@ body .game-features .points-text {
   font-weight: 600;
   -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
+  color: #eee;
 }
 
 body .game-features .points-text .score {
   font-weight: 900;
+}
+
+body .game-features .points-text .dash, body .game-features .points-text .difficult-score {
+  position: relative;
+  color: #888;
+}
+
+body .game-features .points-text .dash {
+  display: inline-block;
+  margin: 0 .25em;
+}
+
+body .game-features .points-text .difficult-score {
+  font-size: 2em;
+  font-weight: 800;
+}
+
+body .game-features .points-text .difficult-score::before {
+  content: attr(data-difficult-score);
 }
 
 body .game-features.menu-drop .pause-button {

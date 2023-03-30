@@ -5,7 +5,7 @@
         sideGenius: [],
         score: 0,
         defaultSpd: 5e2,
-        duration: 5e2
+        duration: 3e2
     };
 
     const menuList = {
@@ -52,8 +52,8 @@
 
             if (menuTool) menuTool(...contents);
         },
-        setScore(score = 0) {
-            const scoreSpan = query('.score');
+        setScore() {
+            const scoreSpan = query('.score'), {score} = dataGenius;
 
             scoreSpan.innerHTML = score;
         },
@@ -65,6 +65,8 @@
             const hasMenu = gameFeatures.classList.contains('menu-drop');
     
             menuContainer.classList.toggle('show-menu', hasMenu);
+
+            enableClicks(!hasMenu);
 
             return hasMenu;
         },
@@ -94,53 +96,68 @@
                     randomNumber = randomRoundedNum(0, 3);
 
                 fullGenius.push(randomNumber);
+                console.clear();
+                console.log(fullGenius);
             };
         },
-        turnSide(sideNum, active = !0) {
+        turnKeySide(sideNum, active) {
+            const side = [...query('.side', true)][sideNum],
+                {isClickEnable} = global,
+                gameBody = query('.game-body'),
+                sideColor = getComputedStyle(side).getPropertyValue('--def-color');
+
+            if (!side || !isClickEnable) return;
+
+            const isActive = side.classList.contains('active');
+
+            side.classList.toggle('active', active == undefined ? !isActive : active);
+            gameBody.style.setProperty('--ball-color', sideColor);
+        },
+        turnSide(sideNum, active) {
             const side = [...query('.side', true)][sideNum],
                 gameBody = query('.game-body'),
                 sideColor = getComputedStyle(side).getPropertyValue('--def-color');
 
-            if (!side) return !1;
+            if (!side) return;
 
-            side.classList.toggle('active', active);
+            const isActive = side.classList.contains('active');
+
+            side.classList.toggle('active', active == undefined ? !isActive : active);
             gameBody.style.setProperty('--ball-color', sideColor);
+        },
+        turnOffSides() {
+            const sides = [...query('.side', true)];
+
+            sides.forEach((side, ind) => turnSide(ind, !1));
         },
         pressSide(sideNum) {
             const {isClickEnable} = global,
-                {sideGenius, duration} = dataGenius;
+                {sideGenius, fullGenius, duration} = dataGenius;
 
             if (!isClickEnable) return;
 
             sideGenius.push(sideNum);
+            console.clear();
+            console.log(fullGenius);
+            console.log(sideGenius);
 
             const verified = verifyArr();
 
             if (verified === 'equal') {
                 enableClicks(!1);
-                turnSide(sideNum, !0);
+
                 dataGenius.score++;
-                setScore(dataGenius.score);
+                setScore();
 
-                setTimeout(() => {
-                    turnSide(sideNum, !1);
-
-                    setTimeout(() => {
-                        increaseFullGenius();
-
-                        startGenius();
-                    }, duration / 2);
-                }, duration);
-            } else if (verified === 'starts') {
-                turnSide(sideNum, !0);
-
-                setTimeout(() => turnSide(sideNum, !1), duration);
-            } else loseGenius();
+                startMemory(duration * 1.5);
+            } else if (!verified) loseGenius();
         },
         loseGenius() {
             dataGenius.fullGenius = [];
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
+            dataGenius.score = 0;
+            console.clear();
 
             setScore();
 
@@ -153,11 +170,25 @@
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
 
+            pauseGenius(!1);
+
             setTimeout(continueGenius, defaultSpd);
+        },
+        pauseGenius(isPause = !0) {
+            global.pauseGame = isPause;
         },
         continueGenius() {
             const {fullGenius, actGenius, defaultSpd, duration} = dataGenius,
+                {pauseGame} = global,
                 prev = fullGenius[actGenius.length];
+
+            if (pauseGame) {
+                dataGenius.actGenius = [];
+                dataGenius.sideGenius = [];
+                turnOffSides();
+
+                return;
+            };
 
             actGenius.push(prev);
 

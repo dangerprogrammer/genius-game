@@ -100,15 +100,17 @@ body {
                 pointer-events: none;
                 opacity: 0;
                 position: absolute;
-                inset: 0;
-                background: var(--def-color);
+                inset: -.5rem;
+                background: var(--def-light-color);
                 border-radius: 4vmin;
                 filter: blur(1vmin);
                 transition: opacity ease-in-out .15s;
+                z-index: -1;
             }
 
             &#green-side {
                 --def-color: #0a4;
+                --def-light-color: #7fa;
                 background: var(--def-color);
 
                 @include numberPosition($center-dist, right, bottom, $border-size);
@@ -116,6 +118,7 @@ body {
 
             &#red-side {
                 --def-color: #e22;
+                --def-light-color: #f99;
                 background: var(--def-color);
 
                 @include numberPosition($center-dist, left, bottom, $border-size);
@@ -123,6 +126,7 @@ body {
 
             &#blue-side {
                 --def-color: #07f;
+                --def-light-color: #6cf;
                 grid-column: 2;
                 grid-row: 2;
                 background: var(--def-color);
@@ -132,6 +136,7 @@ body {
 
             &#yellow-side {
                 --def-color: yellow;
+                --def-light-color: #ffa;
                 background: var(--def-color);
 
                 @include numberPosition($center-dist, right, top, $border-size);
@@ -140,7 +145,8 @@ body {
             &.active {
                 :has(&) {
                     .center-menu .color-ball {
-                        box-shadow: inset 0 0 5vmin 1vmin var(--ball-color);
+                        box-shadow: inset 0 0 10vmin 1vmin var(--ball-color),
+                                    0 0 4vmin var(--ball-color);
                     }
                 }
 
@@ -275,9 +281,29 @@ body {
             font-size: 1.4em;
             font-weight: 600;
             transition: .2s ease-in-out;
+            color: #eee;
 
             .score {
                 font-weight: 900;
+            }
+
+            .dash, .difficult-score {
+                position: relative;
+                color: #888;
+            }
+
+            .dash {
+                display: inline-block;
+                margin: 0 .25em;
+            }
+
+            .difficult-score {
+                font-size: 2em;
+                font-weight: 800;
+            }
+
+            .difficult-score::before {
+                content: attr(data-difficult-score);
             }
         }
 
