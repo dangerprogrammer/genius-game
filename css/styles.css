@@ -479,11 +479,70 @@ body .menu-container section#menu-start .buttons {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 2vmin;
+  width: 50vw;
+  min-width: 15rem;
 }
 
-body .menu-container section#menu-start .buttons > * {
+body .menu-container section#menu-start .buttons .start-game, body .menu-container section#menu-start .buttons [data-open="game-settings"] {
+  position: relative;
+  width: 100%;
+  padding: calc(min(2vmin, 10px)) 0;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
   cursor: pointer;
+}
+
+body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  scale: .8;
+  height: 2vmin;
+  width: 2vmin;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+  opacity: 0;
+}
+
+body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]::before {
+  left: 0;
+  -webkit-transform: translate(3vmin) rotate(-45deg);
+          transform: translate(3vmin) rotate(-45deg);
+  border-top: .2rem solid currentColor;
+  border-left: .2rem solid currentColor;
+}
+
+body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]::after {
+  right: 0;
+  -webkit-transform: translate(-3vmin) rotate(-45deg);
+          transform: translate(-3vmin) rotate(-45deg);
+  border-bottom: .2rem solid currentColor;
+  border-right: .2rem solid currentColor;
+}
+
+body .menu-container section#menu-start .buttons .start-game:hover, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover {
+  letter-spacing: .4vmin;
+  text-shadow: 0 0 1vmin;
+}
+
+body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::after {
+  opacity: .5;
+  scale: 1;
+}
+
+body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::before {
+  -webkit-transform: translate(0) rotate(-45deg);
+          transform: translate(0) rotate(-45deg);
+}
+
+body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open="game-settings"]:hover::after {
+  -webkit-transform: translate(0) rotate(-45deg);
+          transform: translate(0) rotate(-45deg);
+}
+
+body .menu-container section#menu-start .buttons .game-settings {
+  width: 100%;
 }
 
 body .menu-container section:not(.show) {
