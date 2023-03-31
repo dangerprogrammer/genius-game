@@ -108,8 +108,6 @@
                     randomNumber = randomRoundedNum(0, 3);
 
                 fullGenius.push(randomNumber);
-                console.clear();
-                console.log(fullGenius);
             };
         },
         turnKeySide(sideNum, active) {
@@ -149,9 +147,6 @@
             if (!isClickEnable) return;
 
             sideGenius.push(sideNum);
-            console.clear();
-            console.log(fullGenius);
-            console.log(sideGenius);
 
             const verified = verifyArr();
 
@@ -166,29 +161,24 @@
                 } else winGenius();
             } else if (!verified) loseGenius();
         },
-        loseGenius() {
+        resetGenius() {
             dataGenius.fullGenius = [];
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
             dataGenius.score = 0;
             dataGenius.defaultSpd = 5e2;
-            console.clear();
 
             setScore();
+        },
+        loseGenius() {
+            resetGenius();
 
             viewFeatures();
     
             setMenu('restart');
         },
         winGenius() {
-            dataGenius.fullGenius = [];
-            dataGenius.actGenius = [];
-            dataGenius.sideGenius = [];
-            dataGenius.score = 0;
-            dataGenius.defaultSpd = 5e2;
-            console.clear();
-
-            setScore();
+            resetGenius();
 
             viewFeatures();
     
@@ -233,6 +223,21 @@
         enableClicks(enable = !0) {
             global.isClickEnable = enable;
         },
+        restartGenius() {
+            resetGenius();
+
+            viewFeatures();
+
+            setMenu('start', !1);
+            startMemory();
+        },
+        backToMenu() {
+            const settingsButton = query('.settings-button');
+
+            resetGenius();
+            settingsButton.classList.add('hidden');
+            setMenu('start');
+        },
         playGame() {
             const settingsButton = query('.settings-button');
 
@@ -249,14 +254,11 @@
             }, delay);
         },
         updateDifficult() {
-            const difficultGame = query('#difficult-game'), selected = difficultGame.selectedOptions[0].value;
+            const difficultGame = query('#difficult-game'), difficultScore = query('.difficult-score'),
+                selected = difficultGame.selectedOptions[0].value, infiniteIcon = '<ion-icon name="infinite-outline"></ion-icon>';
 
-            setDifficult(selected);
-        },
-        setDifficult(difficult) {
-            const difficultScore = query('.difficult-score');
-
-            difficultScore.dataset.difficultScore = global.gameDifficultScore = difficultList[difficult];
+            difficultScore.innerHTML = selected === 'endless' ? infiniteIcon : difficultList[selected];
+            global.gameDifficultScore = difficultList[selected];
         },
         updateSpeed(speed) {
             global.gameSpeed = speed;

@@ -48,7 +48,7 @@ body {
     justify-content: center;
     overflow: hidden;
     background-color: #112;
-    font-family: Poppins;
+    font-family: Poppins !important;
     color: #eee;
 
     .game-body {
@@ -275,6 +275,8 @@ body {
 
         .points-text {
             position: absolute;
+            display: inline-flex;
+            align-items: flex-end;
             pointer-events: none;
             left: 50%;
             translate: -50%;
@@ -298,12 +300,9 @@ body {
             }
 
             .difficult-score {
-                font-size: 2em;
                 font-weight: 800;
-            }
-
-            .difficult-score::before {
-                content: attr(data-difficult-score);
+                scale: 2;
+                translate: .5rem .25rem;
             }
         }
 
@@ -366,14 +365,19 @@ body {
             translate: 0;
         }
 
-        .start-game, [data-open], [data-open] ~ article > *, .back-menu {
+        .start-game, .restart-game, [data-open], [data-open] ~ article > *, .back-menu {
             position: relative;
             width: 100%;
             font-weight: 600;
             letter-spacing: .1vmin;
             padding: calc(min(2vmin, 10px)) 0;
             transition: .2s ease-in-out;
+            background: transparent;
+            border: none;
+            color: #eee;
             cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
 
             &::before, &::after {
                 content: '';
@@ -504,6 +508,17 @@ body {
                         }
                     }
                 }
+            }
+
+            &#menu-settings {
+                width: 50vw;
+                max-width: 35rem;
+                min-width: 12rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
             }
 
             &:not(.show) {

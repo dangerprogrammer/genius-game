@@ -2,6 +2,7 @@ const pauseButton = query('.pause-button'), settingsButton = query('.settings-bu
     gameFeatures = query('.game-features'), menuContainer = query('.menu-container'),
     startGame = query('.start-game'), restartGameButtons = [...query('.restart-game', !0)],
     difficultGame = query('#difficult-game'), speedGame = query('#speed-game'),
+    backMenu = query('.back-menu'),
     sides = [...query('.side', !0)],
     dataOpens = [...query('[data-open]', !0)];
 
@@ -19,6 +20,8 @@ window.addEventListener("load", () => {
             console.log("mouseUp", ind);
         });
     });
+
+    backMenu.addEventListener("click", backToMenu);
 
     difficultGame.addEventListener("change", updateDifficult);
 
@@ -43,8 +46,6 @@ window.addEventListener("load", () => {
                 setTimeout(() => classList.toggle('show'), (isShow ? articleChilds.length - 1 - ind : ind) * 1e2);
             });
         });
-
-        dataOpen.click();
     });
 
     startGame.addEventListener("click", playGame);
@@ -58,7 +59,7 @@ window.addEventListener("load", () => {
         } else startGenius();
     });
 
-    restartGameButtons.forEach(restartGame => restartGame.addEventListener("click", playGame));
+    restartGameButtons.forEach(restartGame => restartGame.addEventListener("click", restartGenius));
 
     pauseButton.addEventListener("click", () => {
         const hasMenu = viewFeatures();
