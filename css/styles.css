@@ -429,7 +429,7 @@ body .game-features::before {
 }
 
 body .menu-container {
-  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   z-index: 100;
   translate: 0 -100vh;
   -webkit-transition: .4s ease-in-out;
@@ -480,7 +480,8 @@ body .menu-container section#menu-start .buttons {
       -ms-flex-pack: center;
           justify-content: center;
   width: 50vw;
-  min-width: 15rem;
+  max-width: 35rem;
+  min-width: 12rem;
 }
 
 body .menu-container section#menu-start .buttons .start-game, body .menu-container section#menu-start .buttons [data-open], body .menu-container section#menu-start .buttons [data-open] ~ article > * {
@@ -582,7 +583,7 @@ body .menu-container section#menu-start .buttons .game-settings [data-open] ~ ar
   pointer-events: none;
   opacity: 0;
   font-weight: inherit;
-  width: 65%;
+  min-width: 65%;
   padding: calc(min(1.5vmin, .5rem)) 3vmin;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -620,7 +621,7 @@ body .menu-container section#menu-start .buttons .game-settings [data-open] ~ ar
   border-radius: 1vmin;
   text-align: center;
   color: white;
-  width: 10vmin;
+  min-width: 10vmin;
   font-weight: 700;
 }
 

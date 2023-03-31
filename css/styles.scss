@@ -357,7 +357,7 @@ body {
     }
 
     .menu-container {
-        font-size: clamp(.8rem, 2vw, 1.2rem);
+        font-size: clamp(1rem, 2vw, 1.2rem);
         z-index: 100;
         translate: 0 -100vh;
         transition: .4s ease-in-out;
@@ -384,7 +384,8 @@ body {
                     align-items: center;
                     justify-content: center;
                     width: 50vw;
-                    min-width: 15rem;
+                    max-width: 35rem;
+                    min-width: 12rem;
 
                     .start-game, [data-open], [data-open] ~ article > * {
                         position: relative;
@@ -469,7 +470,7 @@ body {
                                 pointer-events: none;
                                 opacity: 0;
                                 font-weight: inherit;
-                                width: 65%;
+                                min-width: 65%;
                                 padding: calc(min(1.5vmin, .5rem)) 3vmin;
                                 display: flex;
                                 flex-direction: row;
@@ -496,7 +497,7 @@ body {
                                     border-radius: 1vmin;
                                     text-align: center;
                                     color: white;
-                                    width: 10vmin;
+                                    min-width: 10vmin;
                                     font-weight: 700;
                                 }
                             }

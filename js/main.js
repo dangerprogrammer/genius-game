@@ -1,6 +1,7 @@
 const pauseButton = query('.pause-button'), settingsButton = query('.settings-button'),
     gameFeatures = query('.game-features'), menuContainer = query('.menu-container'),
     startGame = query('.start-game'), restartGame = query('.restart-game'),
+    difficultGame = query('#difficult-game'),
     sides = [...query('.side', !0)],
     dataOpens = [...query('[data-open]', !0)];
 
@@ -19,19 +20,22 @@ window.addEventListener("load", () => {
         });
     });
 
+    console.log(difficultGame);
+
     dataOpens.forEach(dataOpen => {
         dataOpen.addEventListener("click", () => {
-            const article = [...dataOpen.parentElement.children].find(child => child.id === dataOpen.dataset.open),
+            const article = [...dataOpen.parentElement.children].find(({id}) => id === dataOpen.dataset.open),
                 articleChilds = [...article.children];
 
             dataOpen.classList.toggle('active');
 
-            articleChilds.forEach((child, ind) => {
-                const isShow = child.classList.contains('show');
+            articleChilds.forEach(({classList}, ind) => {
+                const isShow = classList.contains('show');
 
-                setTimeout(() => child.classList.toggle('show'), (isShow ? articleChilds.length - 1 - ind : ind) * 1e2);
+                setTimeout(() => classList.toggle('show'), (isShow ? articleChilds.length - 1 - ind : ind) * 1e2);
             });
         });
+
         dataOpen.click();
     });
 
