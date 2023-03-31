@@ -540,6 +540,8 @@ body {
         z-index: 1000;
         transition: .2s ease-in-out;
         cursor: pointer;
+        text-decoration: none;
+        color: inherit;
 
         &::before {
             content: '';

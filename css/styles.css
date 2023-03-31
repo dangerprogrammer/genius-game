@@ -678,6 +678,8 @@ body .features-card {
   -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 body .features-card::before {
