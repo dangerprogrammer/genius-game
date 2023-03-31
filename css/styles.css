@@ -659,10 +659,41 @@ body .menu-container section:not(.show) {
 
 body .features-card {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: .5rem;
+  left: 1rem;
   color: #eee;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .5rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   z-index: 1000;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+  cursor: pointer;
+}
+
+body .features-card::before {
+  content: '';
+  display: block;
+  height: .2rem;
+  width: 2rem;
+  background: #eee;
+}
+
+body .features-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body .features-card:hover {
+  opacity: .6;
 }
 /*# sourceMappingURL=styles.css.map */
