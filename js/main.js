@@ -1,7 +1,7 @@
 const pauseButton = query('.pause-button'), settingsButton = query('.settings-button'),
     gameFeatures = query('.game-features'), menuContainer = query('.menu-container'),
-    startGame = query('.start-game'), restartGame = query('.restart-game'),
-    difficultGame = query('#difficult-game'),
+    startGame = query('.start-game'), restartGameButtons = [...query('.restart-game', !0)],
+    difficultGame = query('#difficult-game'), speedGame = query('#speed-game'),
     sides = [...query('.side', !0)],
     dataOpens = [...query('[data-open]', !0)];
 
@@ -20,7 +20,15 @@ window.addEventListener("load", () => {
         });
     });
 
-    console.log(difficultGame);
+    difficultGame.addEventListener("change", updateDifficult);
+
+    updateDifficult();
+
+    speedGame.addEventListener("change", () => {
+        const selected = speedGame.selectedOptions[0].value;
+
+        updateSpeed(+selected);
+    });
 
     dataOpens.forEach(dataOpen => {
         dataOpen.addEventListener("click", () => {
@@ -50,7 +58,7 @@ window.addEventListener("load", () => {
         } else startGenius();
     });
 
-    restartGame.addEventListener("click", playGame);
+    restartGameButtons.forEach(restartGame => restartGame.addEventListener("click", playGame));
 
     pauseButton.addEventListener("click", () => {
         const hasMenu = viewFeatures();

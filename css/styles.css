@@ -440,6 +440,81 @@ body .menu-container.show-menu {
   translate: 0;
 }
 
+body .menu-container .start-game, body .menu-container [data-open], body .menu-container [data-open] ~ article > *, body .menu-container .back-menu {
+  position: relative;
+  width: 100%;
+  font-weight: 600;
+  letter-spacing: .1vmin;
+  padding: calc(min(2vmin, 10px)) 0;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+  cursor: pointer;
+}
+
+body .menu-container .start-game::before, body .menu-container .start-game::after, body .menu-container [data-open]::before, body .menu-container [data-open]::after, body .menu-container [data-open] ~ article > *::before, body .menu-container [data-open] ~ article > *::after, body .menu-container .back-menu::before, body .menu-container .back-menu::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  scale: .8;
+  height: 2vmin;
+  width: 2vmin;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+  opacity: 0;
+}
+
+body .menu-container .start-game::before, body .menu-container [data-open]::before, body .menu-container [data-open] ~ article > *::before, body .menu-container .back-menu::before {
+  left: 0;
+  -webkit-transform: translate(3vmin) rotate(-45deg);
+          transform: translate(3vmin) rotate(-45deg);
+  border-top: .2rem solid currentColor;
+  border-left: .2rem solid currentColor;
+}
+
+body .menu-container .start-game::after, body .menu-container [data-open]::after, body .menu-container [data-open] ~ article > *::after, body .menu-container .back-menu::after {
+  right: 0;
+  -webkit-transform: translate(-3vmin) rotate(-45deg);
+          transform: translate(-3vmin) rotate(-45deg);
+  border-bottom: .2rem solid currentColor;
+  border-right: .2rem solid currentColor;
+}
+
+body .menu-container .start-game:hover, body .menu-container [data-open]:hover, body .menu-container [data-open] ~ article > *:hover, body .menu-container .back-menu:hover {
+  letter-spacing: .4vmin;
+  text-shadow: 0 0 1vmin;
+}
+
+body .menu-container .start-game:hover::before, body .menu-container .start-game:hover::after, body .menu-container [data-open]:hover::before, body .menu-container [data-open]:hover::after, body .menu-container [data-open] ~ article > *:hover::before, body .menu-container [data-open] ~ article > *:hover::after, body .menu-container .back-menu:hover::before, body .menu-container .back-menu:hover::after {
+  opacity: .5;
+  scale: 1;
+}
+
+body .menu-container .start-game:hover::before, body .menu-container [data-open]:hover::before, body .menu-container [data-open] ~ article > *:hover::before, body .menu-container .back-menu:hover::before {
+  -webkit-transform: translate(0) rotate(-45deg);
+          transform: translate(0) rotate(-45deg);
+}
+
+body .menu-container .start-game:hover::after, body .menu-container [data-open]:hover::after, body .menu-container [data-open] ~ article > *:hover::after, body .menu-container .back-menu:hover::after {
+  -webkit-transform: translate(0) rotate(-45deg);
+          transform: translate(0) rotate(-45deg);
+}
+
+body .menu-container .start-game.active::before, body .menu-container .start-game.active::after, body .menu-container [data-open].active::before, body .menu-container [data-open].active::after, body .menu-container [data-open] ~ article > *.active::before, body .menu-container [data-open] ~ article > *.active::after, body .menu-container .back-menu.active::before, body .menu-container .back-menu.active::after {
+  opacity: .75;
+  scale: 1;
+}
+
+body .menu-container .start-game.active::before, body .menu-container [data-open].active::before, body .menu-container [data-open] ~ article > *.active::before, body .menu-container .back-menu.active::before {
+  -webkit-transform: translate(0) rotate(-135deg);
+          transform: translate(0) rotate(-135deg);
+}
+
+body .menu-container .start-game.active::after, body .menu-container [data-open].active::after, body .menu-container [data-open] ~ article > *.active::after, body .menu-container .back-menu.active::after {
+  -webkit-transform: translate(0) rotate(45deg);
+          transform: translate(0) rotate(45deg);
+}
+
 body .menu-container section {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -482,81 +557,6 @@ body .menu-container section#menu-start .buttons {
   width: 50vw;
   max-width: 35rem;
   min-width: 12rem;
-}
-
-body .menu-container section#menu-start .buttons .start-game, body .menu-container section#menu-start .buttons [data-open], body .menu-container section#menu-start .buttons [data-open] ~ article > * {
-  position: relative;
-  width: 100%;
-  font-weight: 600;
-  letter-spacing: .1vmin;
-  padding: calc(min(2vmin, 10px)) 0;
-  -webkit-transition: .2s ease-in-out;
-  transition: .2s ease-in-out;
-  cursor: pointer;
-}
-
-body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open]::before, body .menu-container section#menu-start .buttons [data-open]::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  translate: 0 -50%;
-  scale: .8;
-  height: 2vmin;
-  width: 2vmin;
-  -webkit-transition: .2s ease-in-out;
-  transition: .2s ease-in-out;
-  opacity: 0;
-}
-
-body .menu-container section#menu-start .buttons .start-game::before, body .menu-container section#menu-start .buttons [data-open]::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *::before {
-  left: 0;
-  -webkit-transform: translate(3vmin) rotate(-45deg);
-          transform: translate(3vmin) rotate(-45deg);
-  border-top: .2rem solid currentColor;
-  border-left: .2rem solid currentColor;
-}
-
-body .menu-container section#menu-start .buttons .start-game::after, body .menu-container section#menu-start .buttons [data-open]::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *::after {
-  right: 0;
-  -webkit-transform: translate(-3vmin) rotate(-45deg);
-          transform: translate(-3vmin) rotate(-45deg);
-  border-bottom: .2rem solid currentColor;
-  border-right: .2rem solid currentColor;
-}
-
-body .menu-container section#menu-start .buttons .start-game:hover, body .menu-container section#menu-start .buttons [data-open]:hover, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover {
-  letter-spacing: .4vmin;
-  text-shadow: 0 0 1vmin;
-}
-
-body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open]:hover::before, body .menu-container section#menu-start .buttons [data-open]:hover::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::after {
-  opacity: .5;
-  scale: 1;
-}
-
-body .menu-container section#menu-start .buttons .start-game:hover::before, body .menu-container section#menu-start .buttons [data-open]:hover::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::before {
-  -webkit-transform: translate(0) rotate(-45deg);
-          transform: translate(0) rotate(-45deg);
-}
-
-body .menu-container section#menu-start .buttons .start-game:hover::after, body .menu-container section#menu-start .buttons [data-open]:hover::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *:hover::after {
-  -webkit-transform: translate(0) rotate(-45deg);
-          transform: translate(0) rotate(-45deg);
-}
-
-body .menu-container section#menu-start .buttons .start-game.active::before, body .menu-container section#menu-start .buttons .start-game.active::after, body .menu-container section#menu-start .buttons [data-open].active::before, body .menu-container section#menu-start .buttons [data-open].active::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::after {
-  opacity: .75;
-  scale: 1;
-}
-
-body .menu-container section#menu-start .buttons .start-game.active::before, body .menu-container section#menu-start .buttons [data-open].active::before, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::before {
-  -webkit-transform: translate(0) rotate(-135deg);
-          transform: translate(0) rotate(-135deg);
-}
-
-body .menu-container section#menu-start .buttons .start-game.active::after, body .menu-container section#menu-start .buttons [data-open].active::after, body .menu-container section#menu-start .buttons [data-open] ~ article > *.active::after {
-  -webkit-transform: translate(0) rotate(45deg);
-          transform: translate(0) rotate(45deg);
 }
 
 body .menu-container section#menu-start .buttons .game-settings {

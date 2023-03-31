@@ -366,6 +366,75 @@ body {
             translate: 0;
         }
 
+        .start-game, [data-open], [data-open] ~ article > *, .back-menu {
+            position: relative;
+            width: 100%;
+            font-weight: 600;
+            letter-spacing: .1vmin;
+            padding: calc(min(2vmin, 10px)) 0;
+            transition: .2s ease-in-out;
+            cursor: pointer;
+
+            &::before, &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                translate: 0 -50%;
+                scale: .8;
+                height: 2vmin;
+                width: 2vmin;
+                transition: .2s ease-in-out;
+                opacity: 0;
+            }
+
+            &::before {
+                left: 0;
+                transform: translate(3vmin) rotate(-45deg);
+                border-top: .2rem solid currentColor;
+                border-left: .2rem solid currentColor;
+            }
+
+            &::after {
+                right: 0;
+                transform: translate(-3vmin) rotate(-45deg);
+                border-bottom: .2rem solid currentColor;
+                border-right: .2rem solid currentColor;
+            }
+
+            &:hover {
+                letter-spacing: .4vmin;
+                text-shadow: 0 0 1vmin;
+
+                &::before, &::after {
+                    opacity: .5;
+                    scale: 1;
+                }
+
+                &::before {
+                    transform: translate(0) rotate(-45deg);
+                }
+
+                &::after {
+                    transform: translate(0) rotate(-45deg);
+                }
+            }
+
+            &.active {
+                &::before, &::after {
+                    opacity: .75;
+                    scale: 1;
+                }
+
+                &::before {
+                    transform: translate(0) rotate(-135deg);
+                }
+
+                &::after {
+                    transform: translate(0) rotate(45deg);
+                }
+            }
+        }
+
         section {
             user-select: none;
 
@@ -386,75 +455,6 @@ body {
                     width: 50vw;
                     max-width: 35rem;
                     min-width: 12rem;
-
-                    .start-game, [data-open], [data-open] ~ article > * {
-                        position: relative;
-                        width: 100%;
-                        font-weight: 600;
-                        letter-spacing: .1vmin;
-                        padding: calc(min(2vmin, 10px)) 0;
-                        transition: .2s ease-in-out;
-                        cursor: pointer;
-
-                        &::before, &::after {
-                            content: '';
-                            position: absolute;
-                            top: 50%;
-                            translate: 0 -50%;
-                            scale: .8;
-                            height: 2vmin;
-                            width: 2vmin;
-                            transition: .2s ease-in-out;
-                            opacity: 0;
-                        }
-
-                        &::before {
-                            left: 0;
-                            transform: translate(3vmin) rotate(-45deg);
-                            border-top: .2rem solid currentColor;
-                            border-left: .2rem solid currentColor;
-                        }
-
-                        &::after {
-                            right: 0;
-                            transform: translate(-3vmin) rotate(-45deg);
-                            border-bottom: .2rem solid currentColor;
-                            border-right: .2rem solid currentColor;
-                        }
-
-                        &:hover {
-                            letter-spacing: .4vmin;
-                            text-shadow: 0 0 1vmin;
-
-                            &::before, &::after {
-                                opacity: .5;
-                                scale: 1;
-                            }
-
-                            &::before {
-                                transform: translate(0) rotate(-45deg);
-                            }
-
-                            &::after {
-                                transform: translate(0) rotate(-45deg);
-                            }
-                        }
-
-                        &.active {
-                            &::before, &::after {
-                                opacity: .75;
-                                scale: 1;
-                            }
-
-                            &::before {
-                                transform: translate(0) rotate(-135deg);
-                            }
-
-                            &::after {
-                                transform: translate(0) rotate(45deg);
-                            }
-                        }
-                    }
 
                     .game-settings {
                         width: 100%;

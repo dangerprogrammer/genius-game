@@ -32,13 +32,25 @@
             showMenu(menuPause);
         },
         restart() {
-            const menuRestart = query('#menu-restart'),
-                settingsButton = query('.settings-button');
+            const menuRestart = query('#menu-restart'), settingsButton = query('.settings-button');
 
             settingsButton.classList.add('hidden');
 
             showMenu(menuRestart);
+        },
+        winner() {
+            const menuWinner = query('#menu-winner'), settingsButton = query('.settings-button');
+
+            settingsButton.classList.add('hidden');
+
+            showMenu(menuWinner);
         }
+    },
+    difficultList = {
+        'easy': 5,
+        'normal': 12,
+        'hard': 20,
+        'endless': Infinity
     },
     globalFunctions = {
         query(elem, all = !1) {
@@ -131,7 +143,7 @@
             sides.forEach((side, ind) => turnSide(ind, !1));
         },
         pressSide(sideNum) {
-            const {isClickEnable} = global,
+            const {isClickEnable, gameDifficultScore} = global,
                 {sideGenius, fullGenius, duration} = dataGenius;
 
             if (!isClickEnable) return;
@@ -146,10 +158,12 @@
             if (verified === 'equal') {
                 enableClicks(!1);
 
-                dataGenius.score++;
-                setScore();
+                if (sideGenius.length < gameDifficultScore) {
+                    dataGenius.score++;
+                    setScore();
 
-                startMemory(duration * 1.5);
+                    startMemory(duration * 1.5);
+                } else winGenius();
             } else if (!verified) loseGenius();
         },
         loseGenius() {
@@ -166,10 +180,24 @@
     
             setMenu('restart');
         },
+        winGenius() {
+            dataGenius.fullGenius = [];
+            dataGenius.actGenius = [];
+            dataGenius.sideGenius = [];
+            dataGenius.score = 0;
+            dataGenius.defaultSpd = 5e2;
+            console.clear();
+
+            setScore();
+
+            viewFeatures();
+    
+            setMenu('winner');
+        },
         startGenius() {
             dataGenius.actGenius = [];
             dataGenius.sideGenius = [];
-            dataGenius.defaultSpd = Math.max(dataGenius.defaultSpd - 25, 150);
+            dataGenius.defaultSpd = Math.max(dataGenius.defaultSpd - 25, 150) / (global.gameSpeed || !0);
 
             const {defaultSpd} = dataGenius;
 
@@ -219,8 +247,21 @@
                 startGenius();
                 enableClicks(!1);
             }, delay);
+        },
+        updateDifficult() {
+            const difficultGame = query('#difficult-game'), selected = difficultGame.selectedOptions[0].value;
+
+            setDifficult(selected);
+        },
+        setDifficult(difficult) {
+            const difficultScore = query('.difficult-score');
+
+            difficultScore.dataset.difficultScore = global.gameDifficultScore = difficultList[difficult];
+        },
+        updateSpeed(speed) {
+            global.gameSpeed = speed;
         }
     };
 
     for (const func in globalFunctions) global[func] ||= globalFunctions[func];
-})(window || this);
+})(window ?? this);
