@@ -436,7 +436,7 @@ body .menu-container {
   translate: 0 -100vh;
   -webkit-transition: .4s ease-in-out;
   transition: .4s ease-in-out;
-  font-size: 1.2em;
+  font-size: 2rem;
 }
 
 body .menu-container.show-menu {
