@@ -656,4 +656,13 @@ body .menu-container section#menu-settings {
 body .menu-container section:not(.show) {
   display: none !important;
 }
+
+body .features-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #eee;
+  font-size: 2rem;
+  z-index: 1000;
+}
 /*# sourceMappingURL=styles.css.map */

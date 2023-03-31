@@ -526,4 +526,13 @@ body {
             }
         }
     }
+
+    .features-card {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #eee;
+        font-size: 2rem;
+        z-index: 1000;
+    }
 }
