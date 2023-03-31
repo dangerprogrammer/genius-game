@@ -432,11 +432,11 @@ body .game-features::before {
 }
 
 body .menu-container {
-  font-size: clamp(1rem, 2vw, 1.2rem);
   z-index: 100;
   translate: 0 -100vh;
   -webkit-transition: .4s ease-in-out;
   transition: .4s ease-in-out;
+  font-size: 1.2em;
 }
 
 body .menu-container.show-menu {

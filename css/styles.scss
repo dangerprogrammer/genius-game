@@ -356,10 +356,10 @@ body {
     }
 
     .menu-container {
-        font-size: clamp(1rem, 2vw, 1.2rem);
         z-index: 100;
         translate: 0 -100vh;
         transition: .4s ease-in-out;
+        font-size: 1.2em;
 
         &.show-menu  {
             translate: 0;
